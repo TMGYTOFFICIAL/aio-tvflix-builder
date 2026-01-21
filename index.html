@@ -256,11 +256,6 @@
                                 <input type="text" id="fanart-key" placeholder="Fanart API Key (Required for Meta)" class="w-full bg-slate-800 border border-slate-700 p-2 rounded text-sm text-white outline-none">
                                 <a href="https://fanart.tv/get-an-api-key/" target="_blank" class="text-[10px] text-slate-500 hover:text-indigo-400 block underline mt-1">Fanart API Settings</a>
                             </div>
-
-                            <div id="trakt-field" class="mt-2">
-                                <input type="text" id="trakt-key" placeholder="Trakt API Key (Optional)" class="w-full bg-slate-800 border border-slate-700 p-2 rounded text-sm text-white outline-none">
-                                <a href="https://trakt.tv/oauth/applications" target="_blank" class="text-[10px] text-slate-500 hover:text-indigo-400 block underline mt-1">Trakt API Settings</a>
-                            </div>
                         </div>
                     </div>
 
@@ -870,7 +865,6 @@
             // Previous logic hid it for streams, user says it's missing.
             document.getElementById('tvdb-field').style.display = 'block'; 
             
-            document.getElementById('trakt-field').style.display = isStreams && !isMeta ? 'none' : 'block';
             document.getElementById('gemini-section').style.display = isStreams && !isMeta ? 'none' : 'block';
 
             // Prefs Page Visibility
@@ -967,7 +961,6 @@
             const t4 = document.getElementById('tmdb-token').value;
             const tv = document.getElementById('tvdb-key').value;
             const fa = document.getElementById('fanart-key').value;
-            const tr = document.getElementById('trakt-key').value;
             const gemini = document.getElementById('gemini-key').value;
             const isDebrid = document.getElementById('use-rd') && document.getElementById('use-rd').checked; // Simple check, refined later
             
@@ -1023,7 +1016,8 @@
                             mBase.config.apiKeys.tmdb = t3;
                             mBase.config.apiKeys.tvdb = tv;
                             mBase.config.apiKeys.fanart = fa;
-                            mBase.config.apiKeys.trakt = tr;
+                            // Trakt removed but kept as empty string
+                            mBase.config.apiKeys.trakt = "";
                             
                             if (document.getElementById('enable-gemini').checked && gemini) {
                                 mBase.config.apiKeys.gemini = gemini;
@@ -1186,3 +1180,5 @@
     </script>
 </body>
 </html>
+
+
