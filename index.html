@@ -258,6 +258,22 @@
 
                 <div class="step" id="step-keys">
                     <h2 class="text-2xl font-bold mb-6 text-white tracking-tight">5. API Credentials</h2>
+                    
+                    <div id="debridio-section" class="mb-6">
+                        <div class="bg-indigo-900/20 border border-indigo-500/30 p-4 rounded-xl mb-4">
+                            <label class="flex items-center space-x-4 cursor-pointer">
+                                <input type="checkbox" id="enable-debridio" class="w-6 h-6 rounded border-slate-600 text-indigo-600 bg-slate-800" onchange="toggleDebridio(this.checked)">
+                                <div>
+                                    <p class="font-bold text-white">Enable Debridio Scraper?</p>
+                                    <p class="text-xs text-indigo-300">Requires a Debridio API Key.</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div id="debridio-input" class="hidden pl-4">
+                            <input type="text" id="debridio-key" placeholder="Paste Debridio API Key" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-lg text-white outline-none focus:ring-1 focus:ring-indigo-500">
+                            <a href="https://debridio.adobestudios.com/" target="_blank" class="text-[10px] text-indigo-400 mt-2 block hover:underline">Get Debridio Key →</a>
+                        </div>
+                    </div>
                     <div class="bg-slate-900/80 p-5 rounded-xl border border-indigo-500/20 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-4">
                             <p class="text-xs text-indigo-400 font-bold uppercase tracking-widest">TMDb Config <span class="text-red-500">*</span></p>
@@ -955,8 +971,14 @@
         function toggleDebridInput(id, checked) {
             document.getElementById(id).classList.toggle('hidden', !checked);
         }
-        function toggleGemini(checked) {
+function toggleGemini(checked) {
             document.getElementById('gemini-input').classList.toggle('hidden', !checked);
+        }
+        function toggleDebridio(checked) {
+            document.getElementById('debridio-input').classList.toggle('hidden', !checked);
+        }
+        // Redundant function definition to keep the original search line working below if needed
+        function _ignored_toggleGemini(checked) {            document.getElementById('gemini-input').classList.toggle('hidden', !checked);
         }
 
         document.getElementById('do-limit').addEventListener('change', e => document.getElementById('speed-options').classList.toggle('hidden', !e.target.checked));
@@ -1038,8 +1060,14 @@
                 }
             }
 
-            if (currentStepId === 'step-keys') {
-                const tmdb = document.getElementById('tmdb-key').value.trim();
+if (currentStepId === 'step-keys') {
+                // Debridio Validation
+                if (document.getElementById('enable-debridio').checked) {
+                    if (!document.getElementById('debridio-key').value.trim()) {
+                        alert("Please enter a Debridio API Key or uncheck the box.");
+                        return false;
+                    }
+                }                const tmdb = document.getElementById('tmdb-key').value.trim();
                 if (!tmdb) { alert("TMDb API Key is required."); return false; }
                 
                 if (currentMode !== 'streams') {
@@ -1173,8 +1201,26 @@
                     base.tmdbApiKey = t3;
                     base.tmdbAccessToken = t4;
                     base.tvdbApiKey = tv; // Optional usually, but we pass it
-                    base.resultLimits = { resolution: parseInt(resLimit) };
-                    
+base.resultLimits = { resolution: parseInt(resLimit) };
+
+                    // --- DEBRIDIO INTEGRATION ---
+                    if (document.getElementById('enable-debridio') && document.getElementById('enable-debridio').checked) {
+                        const debKey = document.getElementById('debridio-key').value.trim();
+                        if (base.presets) {
+                            base.presets.push({
+                                "type": "debridio",
+                                "instanceId": "1d0",
+                                "enabled": true,
+                                "options": {
+                                    "name": "Debridio Scraper",
+                                    "timeout": 10000,
+                                    "resources": ["stream"],
+                                    "debridioApiKey": debKey,
+                                    "mediaTypes": []
+                                }
+                            });
+                        }
+                    }                    
                     // AutoPlay Method (New Step)
                     if(base.autoPlay) {
                         base.autoPlay.method = autoPlayMethod;
@@ -1235,8 +1281,14 @@
                         }
                     }
 
-                    // Group Logic Update
-                    if (hasDebrid) {
+// Group Logic Update
+                    if (document.getElementById('enable-debridio') && document.getElementById('enable-debridio').checked && base.groups && Array.isArray(base.groups.groupings)) {
+                         // Unshift adds to the START of the array (Group 1), moving everything else down
+                         base.groups.groupings.unshift({
+                             "addons": ["1d0"],
+                             "condition": "true"
+                         });
+                    }                    if (hasDebrid) {
                         // Debrid Logic: Check cached count vs limit
                         const limitVal = parseInt(resLimit);
                         const groupCondition = `(count(resolution(cached(totalStreams), '2160p')) < ${limitVal} and count(resolution(cached(totalStreams), '1080p')) < ${limitVal} and count(resolution(cached(totalStreams), '720p')) < ${limitVal}) or totalTimeTaken > 10000`;
