@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIO.TVFLIX Builder v3.13</title>
+    <title>AIO.TVFLIX Builder v3.16</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .page { display: none; }
@@ -271,9 +271,10 @@
                         </div>
                         <div id="debridio-input" class="hidden pl-4">
                             <input type="text" id="debridio-key" placeholder="Paste Debridio API Key" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-lg text-white outline-none focus:ring-1 focus:ring-indigo-500">
-                            <a href="https://debridio.adobestudios.com/" target="_blank" class="text-[10px] text-indigo-400 mt-2 block hover:underline">Get Debridio Key →</a>
+                            <a href="https://debridio.com/account" target="_blank" class="text-[10px] text-indigo-400 mt-2 block hover:underline">Get Debridio Key →</a>
                         </div>
                     </div>
+
                     <div class="bg-slate-900/80 p-5 rounded-xl border border-indigo-500/20 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-4">
                             <p class="text-xs text-indigo-400 font-bold uppercase tracking-widest">TMDb Config <span class="text-red-500">*</span></p>
@@ -295,6 +296,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div id="gemini-section" class="mt-6">
                         <div class="bg-amber-900/20 border border-amber-600/30 p-4 rounded-xl mb-4">
                             <label class="flex items-center space-x-4 cursor-pointer">
@@ -387,48 +389,7 @@
                 </div>
 
                 <div id="instr-final" class="bg-slate-800 p-6 rounded-xl border border-slate-600">
-                    <h3 class="text-xl font-bold text-white mb-4">3. Final Polish with CineBye</h3>
-                    
-                    <ol class="list-decimal pl-5 space-y-6 text-slate-300 text-sm">
-                        <li>
-                            <div class="mb-2"><strong>Open CineBye Manager</strong></div>
-                            <p class="text-xs text-slate-400 mb-2">This tool allows you to clean up your Stremio interface.</p>
-                            <a href="https://cinebye.elfhosted.com/" target="_blank" class="inline-block bg-slate-700 px-4 py-2 rounded text-white text-xs font-bold hover:bg-slate-600 border border-slate-500">Open CineBye</a>
-                            <div class="mt-2 text-xs text-slate-400 space-y-2">
-                                <p>1. Log in.</p>
-                                <p>2. Tick <strong>Remove Cinemeta Catalogs</strong> and <strong>Remove Cinemeta Search</strong>.</p>
-                                <p>3. <strong>Cleanup & Reorder:</strong> You can also reorder your addons here. To delete old addons, simply click the <span class="text-red-400 font-bold">Red X</span> next to them.</p>
-                                <p>4. <strong>Recommended Order:</strong></p>
-                                <div class="pl-4 font-mono text-xs text-indigo-300">
-                                    1. Cinemeta (Required Base)<br>
-                                    2. AIO Metadata<br>
-                                    3. AIO Streams
-                                </div>
-                                <p>5. Click <strong>Sync to Stremio</strong>.</p>
-                            </div>
-                        </li>
-                    </ol>
-
-                    <div class="mt-8 pt-6 border-t border-slate-700">
-                        <details class="group">
-                            <summary class="flex items-center cursor-pointer text-xs font-bold text-amber-500 uppercase tracking-widest hover:text-amber-400">
-                                <span class="mr-2">⚠️ Can't install to Stremio on this device?</span>
-                                <span class="group-open:rotate-180 transition-transform">▼</span>
-                            </summary>
-                            <div class="mt-4 bg-slate-900 p-4 rounded-lg border border-slate-700 text-xs text-slate-400 leading-relaxed">
-                                <p class="mb-2">If the "Install" buttons above don't open Stremio app:</p>
-                                <ol class="list-decimal pl-4 space-y-2">
-                                    <li>Complete the Save step on the config websites to generate your <strong>Install URL</strong>.</li>
-                                    <li>Copy that long URL (it starts with <code>https://...</code>).</li>
-                                    <li>Open <a href="https://stremio-addon-manager.pages.dev/" target="_blank" class="text-indigo-400 underline">Addon Manager</a>.</li>
-                                    <li>Click <strong>Add Addon</strong> and paste the URL manually.</li>
-                                    <li>Click <strong>Sync to Stremio</strong>.</li>
-                                    <li>Go back and do the CineBye step afterwards.</li>
-                                </ol>
-                            </div>
-                        </details>
                     </div>
-                </div>
             </div>
 
             <div class="mt-12 flex justify-center gap-4">
@@ -467,6 +428,18 @@
                 "searchEnabled": true,
                 "timezone": "Europe/London",
                 "catalogs": [
+					{ "id": "tmdb.now_playing", "name": "Latest Releases", "type": "movie", "source": "tmdb", "enabled": true, "showInHome": true, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "movie" },
+					{ "id": "tmdb.airing_today", "name": "Latest Releases", "type": "series", "source": "tmdb", "enabled": true, "showInHome": true, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "series" }, 
+                    
+                    { "id": "tmdb.top_rated", "name": "Genres", "type": "movie", "source": "tmdb", "enabled": true, "showInHome": false, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "movie" },
+                    { "id": "tmdb.top_rated", "name": "Genres", "type": "series", "source": "tmdb", "enabled": true, "showInHome": false, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "series" },
+
+                    { "id": "tmdb.popular", "name": "Popular", "type": "movie", "source": "tmdb", "enabled": true, "showInHome": true, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "movie" },
+                    { "id": "tmdb.popular", "name": "Popular", "type": "series", "source": "tmdb", "enabled": true, "showInHome": true, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "series" },
+                    
+                    { "id": "tmdb.year", "name": "By Year", "type": "movie", "source": "tmdb", "enabled": true, "showInHome": false, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "movie" },
+                    { "id": "tmdb.year", "name": "By Year", "type": "series", "source": "tmdb", "enabled": true, "showInHome": false, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "series" },
+                    
                     { "id": "tmdb.trending", "name": "Trending", "type": "movie", "source": "tmdb", "enabled": true, "showInHome": true, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "movie" },
                     { "id": "tmdb.trending", "name": "Trending", "type": "series", "source": "tmdb", "enabled": true, "showInHome": true, "enableRatingPosters": true, "randomizePerPage": false, "displayType": "series" },
                     { "id": "streaming.nfx", "name": "Netflix (Movies)", "type": "movie", "source": "streaming", "enabled": true, "showInHome": true, "enableRatingPosters": true, "randomizePerPage": false },
@@ -570,7 +543,7 @@
             }
         };
 
-        const MASTER_WITHOUT_DEBRID = {
+const MASTER_WITHOUT_DEBRID = {
             "services": [
                 { "id": "realdebrid", "enabled": false, "credentials": {} }, { "id": "alldebrid", "enabled": false, "credentials": {} }, { "id": "premiumize", "enabled": false, "credentials": {} },
                 { "id": "debridlink", "enabled": false, "credentials": {} }, { "id": "torbox", "enabled": false, "credentials": {} }, { "id": "offcloud", "enabled": false, "credentials": {} },
@@ -580,14 +553,14 @@
             ],
             "presets": [
                 { "type": "mediafusion", "instanceId": "bcd", "enabled": true, "options": { "name": "MediaFusion", "timeout": 10000, "resources": ["stream", "catalog", "meta"], "useCachedResultsOnly": false, "enableWatchlistCatalogs": false, "downloadViaBrowser": false, "contributorStreams": false, "certificationLevelsFilter": [], "nudityFilter": [], "mediaTypes": [] } },
-                { "type": "comet", "instanceId": "1c5", "enabled": true, "options": { "name": "Comet", "timeout": 10000, "resources": ["stream"], "includeP2P": false, "removeTrash": true, "mediaTypes": [] } },
+                { "type": "comet", "instanceId": "1c5", "enabled": true, "options": { "name": "Comet", "timeout": 10000, "resources": ["stream"], "includeP2P": true, "removeTrash": true, "mediaTypes": [] } },
                 { "type": "torrentio", "instanceId": "23a", "enabled": true, "options": { "name": "Torrentio", "timeout": 10000, "resources": ["stream", "catalog", "meta"], "useMultipleInstances": false, "providers": [] } }
             ],
             "formatter": {
                 "id": "custom",
                 "definition": {
-                    "name": "{stream.resolution::exists[\"{stream.resolution::replace('2160p','4K')::replace('1080p','HD')::replace('720p','SD')}\"||\"\"]} {stream.quality::exists[\"{stream.quality::replace('REMUX','+')::replace('BluRay','⭐⭐⭐⭐⭐')::replace('WEB-DL','⭐⭐⭐⭐')::replace('WEBRip','⭐⭐⭐⭐')}\"||\"\"]} {service.cached::istrue[\"⚡\"||\"⏳\"]}",
-                    "description": "{stream.type::=usenet[\"📦 USN \"||\"\"]}{stream.title::exists[\"🎬 {stream.title}\"||\"\"]}{stream.seasonEpisode::exists[\" - {stream.seasonEpisode::join(' ')}\"||\"\"]}{stream.year::exists[\" ({stream.year})\"||\"\"]}\n{service.cached::istrue[\"🟢 INSTANT PLAY\"||\"🔴 NEEDS TO DOWNLOAD\"]}\n─────────────\n{stream.languageEmojis::exists[\"Languages: {stream.languageEmojis}\"||\"\"]}\n{stream.quality::exists[\"✨ {stream.quality::replace('REMUX','+')::replace('BluRay','Premium Quality')::replace('WEB-DL','Streaming Quality')::replace('WEBRip','Streaming Quality')}\"||\"\"]}{stream.visualTags::~HDR::istrue[\" | 🌈 HDR\"||\"\"]}{stream.visualTags::~DV::istrue[\" | 🎥 Dolby Vision\"||\"\"]}{stream.audioTags::exists[\" | 🔊 {stream.audioTags::join(', ')}\"||\"\"]}\n─────────────\n📂 {stream.size::>0[\"{stream.size::bytes}\"||\"\"]}{service.name::exists[\" | ☁️ {service.name}\"||\"\"]}{service.cached::isfalse[\" | 👥 {stream.seeders}\"||\"\"]}{addon.name::exists[\" | 🛰️ {addon.name}\"||\"\"]}"
+                    "name": "{stream.resolution::exists[\"{stream.resolution::replace('2160p','4K')::replace('1080p','HD')::replace('720p','SD')}\"||\"\"]} {stream.quality::exists[\"{stream.quality::replace('REMUX','+')::replace('BluRay','⭐⭐⭐⭐⭐')::replace('WEB-DL','⭐⭐⭐⭐')::replace('WEBRip','⭐⭐⭐⭐')}\"||\"\"]}\n",
+                    "description": "{stream.title::exists[\"🎬 {stream.title}\"||\"\"]}{stream.seasonEpisode::exists[\" - {stream.seasonEpisode::join(' ')}\"||\"\"]}{stream.year::exists[\" ({stream.year})\"||\"\"]}\n───────────────────\n{stream.languageEmojis::exists[\"Languages: {stream.languageEmojis}\"||\"\"]}\n{stream.quality::exists[\"✨ {stream.quality::replace('REMUX','+')::replace('BluRay','Premium Quality')::replace('WEB-DL','Streaming Quality')::replace('WEBRip','Streaming Quality')}\"||\"\"]}{stream.visualTags::~HDR::istrue[\" | 🌈 HDR\"||\"\"]}{stream.visualTags::~DV::istrue[\" | 🎥 Dolby Vision\"||\"\"]}{stream.audioTags::exists[\" | 🔊 {stream.audioTags::join(', ')}\"||\"\"]}\n───────────────────\n📂 {stream.size::>0[\"{stream.size::bytes}\"||\"\"]}{stream.seeders::>0[\" | 👥 {stream.seeders}\"||\"\"]}{addon.name::exists[\" | 🛰️ {addon.name}\"||\"\"]}"
                 }
             },
             "preferredQualities": ["BluRay REMUX", "BluRay", "WEB-DL", "WEBRip", "HDRip", "HC HD-Rip", "DVDRip", "HDTV", "CAM", "TS", "TC", "SCR", "Unknown"],
@@ -596,15 +569,10 @@
             "excludedVisualTags": ["3D"],
             "sortCriteria": {
                 "global": [
-                    { "key": "cached", "direction": "desc" }, { "key": "resolution", "direction": "desc" }, { "key": "quality", "direction": "desc" }, { "key": "visualTag", "direction": "desc" },
-                    { "key": "audioTag", "direction": "desc" }, { "key": "size", "direction": "asc" }, { "key": "library", "direction": "desc" }
-                ],
-                "cached": [
-                    { "key": "cached", "direction": "desc" }, { "key": "resolution", "direction": "desc" }, { "key": "quality", "direction": "desc" }, { "key": "addon", "direction": "desc" },
-                    { "key": "size", "direction": "asc" }, { "key": "streamType", "direction": "desc" }
+                    { "key": "seeders", "direction": "desc" }, { "key": "resolution", "direction": "desc" }, { "key": "size", "direction": "desc" }
                 ],
                 "uncached": [
-                    { "key": "streamType", "direction": "desc" }, { "key": "resolution", "direction": "desc" }, { "key": "quality", "direction": "desc" }, { "key": "size", "direction": "asc" }, { "key": "seeders", "direction": "desc" }
+                    { "key": "seeders", "direction": "desc" }, { "key": "resolution", "direction": "desc" }, { "key": "size", "direction": "desc" }
                 ]
             },
             "posterService": "rpdb",
@@ -633,14 +601,14 @@
             "excludedStreamTypes": [],
             "includedStreamTypes": [],
             "requiredStreamTypes": [],
-            "preferredStreamTypes": ["usenet"],
+            "preferredStreamTypes": ["p2p"],
             "excludedEncodes": [],
             "includedEncodes": [],
             "requiredEncodes": [],
             "preferredEncodes": [],
             "excludedKeywords": [],
-            "includeSeederRange": [0, 1000],
-            "requiredSeederRange": [10, 1000],
+            "includeSeederRange": [10, 100000],
+            "requiredSeederRange": [10, 100000],
             "seederRangeTypes": ["p2p"],
             "ageRangeTypes": ["usenet"],
             "digitalReleaseFilter": { "enabled": false, "tolerance": 1, "requestTypes": ["movie", "series", "anime"], "addons": [] },
@@ -651,18 +619,16 @@
             "excludeUncachedFromAddons": [],
             "excludeUncachedFromServices": [],
             "excludeUncachedFromStreamTypes": [],
-            "dynamicAddonFetching": { "enabled": false, "condition": "count(cached(totalStreams)) >= 5 or totalTimeTaken >= 3000." },
+            "dynamicAddonFetching": { "enabled": false, "condition": "count(totalStreams) >= 15 or totalTimeTaken >= 10000" },
             "groups": {
                 "enabled": true,
                 "groupings": [
-                    { "addons": ["1c5", "bcd", "be5"], "condition": "true" },
-                    { "addons": ["23a", "b9f", "da0"], "condition": "(count(resolution(cached(totalStreams)) >= 3 and count(resolution(cached(totalStreams), '1080p')) >= 3 and count(resolution(cached(totalStreams), '720p')) >= 3) or totalTimeTaken > 10000" },
-                    { "addons": ["92e", "705", "9a3", "f89"], "condition": "(count(resolution(cached(totalStreams)) >= 3 and count(resolution(cached(totalStreams)) >= 3 and count(resolution(cached(totalStreams), '1080p')) >= 3 and count(resolution(cached(totalStreams), '720p')) >= 3) or totalTimeTaken > 10000" }
+                    { "addons": ["23a", "1c5", "bcd", "e7b"], "condition": "true" }
                 ],
                 "behaviour": "sequential"
             },
             "proxy": { "id": "builtin", "proxiedAddons": [], "proxiedServices": [] },
-            "resultLimits": { "resolution": 3 },
+            "resultLimits": { "resolution": 5 },
             "size": { "global": { "movies": [0, 100000000000], "series": [0, 100000000000] } },
             "hideErrors": true,
             "hideErrorsForResources": [],
@@ -670,16 +636,12 @@
             "yearMatching": { "enabled": true, "requestTypes": [], "addons": [] },
             "titleMatching": { "mode": "contains", "enabled": true, "requestTypes": [], "addons": [] },
             "seasonEpisodeMatching": { "enabled": true, "requestTypes": [], "addons": [] },
-            "autoPlay": { "attributes": ["quality", "resolution", "service"] },
+            "autoPlay": { "attributes": ["service"] },
             "areYouStillThere": { "enabled": true, "episodesBeforeCheck": 4 },
-            "precacheNextEpisode": true,
-            "alwaysPrecache": true,
-            "catalogModifications": [
-                { "id": "23a791b.torrentio-torbox-torrents", "name": "TorBox Torrents", "type": "other", "enabled": false, "shuffle": false, "usePosterService": false, "hideable": true, "searchable": false, "addonName": "Torrentio" },
-                { "id": "23a791b.torrentio-torbox-usenet", "name": "TorBox Usenet", "type": "other", "enabled": false, "shuffle": false, "usePosterService": false, "hideable": true, "searchable": false, "addonName": "Torrentio" },
-                { "id": "23a791b.torrentio-torbox-webdl", "name": "TorBox WebDL", "type": "other", "enabled": false, "shuffle": false, "usePosterService": false, "hideable": true, "searchable": false, "addonName": "Torrentio" }
-            ],
-            "cacheAndPlay": { "streamTypes": ["usenet"] },
+            "precacheNextEpisode": false,
+            "alwaysPrecache": false,
+            "catalogModifications": [],
+            "cacheAndPlay": { "streamTypes": [] },
             "autoRemoveDownloads": true
         };
 
@@ -848,11 +810,12 @@
             const grouped = {};
 
             raw.forEach(c => {
-                // Group by ID to naturally separate Netflix (nfx) from Kids (nfk)
-                let key = c.id;
-                
-                // Clean Name for display (remove Movie/Series suffixes)
+                // Clean Name first (removes (Movies)/(Series) so they match)
                 let cleanName = c.name.replace(' (Movies)', '').replace(' (Series)', '');
+                
+                // FIX: Group by Name instead of ID.
+                // This merges separate Movie/Series catalogs into one single checkbox row
+                let key = cleanName; 
                 
                 if (!grouped[key]) {
                     grouped[key] = {
@@ -971,14 +934,15 @@
         function toggleDebridInput(id, checked) {
             document.getElementById(id).classList.toggle('hidden', !checked);
         }
-function toggleGemini(checked) {
+        function toggleGemini(checked) {
             document.getElementById('gemini-input').classList.toggle('hidden', !checked);
         }
         function toggleDebridio(checked) {
             document.getElementById('debridio-input').classList.toggle('hidden', !checked);
         }
         // Redundant function definition to keep the original search line working below if needed
-        function _ignored_toggleGemini(checked) {            document.getElementById('gemini-input').classList.toggle('hidden', !checked);
+        function _ignored_toggleGemini(checked) {
+            document.getElementById('gemini-input').classList.toggle('hidden', !checked);
         }
 
         document.getElementById('do-limit').addEventListener('change', e => document.getElementById('speed-options').classList.toggle('hidden', !e.target.checked));
@@ -1010,11 +974,15 @@ function toggleGemini(checked) {
 
             // UI Conditional Visibility
             document.getElementById('streams-token-field').style.display = isMeta ? 'none' : 'block';
-            document.getElementById('section-languages').style.display = isMeta ? 'none' : 'block'; // Audio Languages (Streams only)
-            document.getElementById('section-interface-lang').style.display = isStreams ? 'none' : 'block'; // Interface Lang (Meta only)
-            document.getElementById('section-autoplay').style.display = isMeta ? 'none' : 'block'; // Hide AutoPlay for Meta
+            document.getElementById('section-languages').style.display = isMeta ? 'none' : 'block'; 
+            document.getElementById('section-interface-lang').style.display = isStreams ? 'none' : 'block'; 
+            document.getElementById('section-autoplay').style.display = isMeta ? 'none' : 'block'; 
             document.getElementById('prefs-res-limit').style.display = isMeta ? 'none' : 'block';
             document.getElementById('cam-box').style.display = isMeta ? 'none' : 'flex';
+            
+            // HIDE Debridio in Meta Mode
+            const debSection = document.getElementById('debridio-section');
+            if(debSection) debSection.style.display = isMeta ? 'none' : 'block';
             
             document.getElementById('next-btn').style.display = (idx === wizardFlow.length - 1) ? 'none' : 'block';
             document.getElementById('finish-btn').classList.toggle('hidden', idx !== wizardFlow.length - 1);
@@ -1031,7 +999,6 @@ function toggleGemini(checked) {
         function goBackToWizard() {
             document.getElementById('page-downloads').classList.remove('active');
             document.getElementById('page-wizard').classList.add('active');
-            // Don't change currentStepIdx, so they land on the last step (Review/Keys/Posters)
         }
 
         // --- VALIDATION & BUILD ---
@@ -1041,10 +1008,8 @@ function toggleGemini(checked) {
             
             if (currentStepId === 'step-debrid') {
                 const checks = document.querySelectorAll('.debrid-check');
-                let hasChecked = false;
                 for (let c of checks) {
                     if (c.checked) {
-                        hasChecked = true;
                         let actualInputId = '';
                         if(c.id === 'use-rd') actualInputId = 'key-realdebrid';
                         else if(c.id === 'use-tb') actualInputId = 'key-torbox';
@@ -1060,23 +1025,23 @@ function toggleGemini(checked) {
                 }
             }
 
-if (currentStepId === 'step-keys') {
-                // Debridio Validation
-                if (document.getElementById('enable-debridio').checked) {
+            if (currentStepId === 'step-keys') {
+                // Debridio Validation (Only if visible/not meta)
+                if (currentMode !== 'meta' && document.getElementById('enable-debridio').checked) {
                     if (!document.getElementById('debridio-key').value.trim()) {
                         alert("Please enter a Debridio API Key or uncheck the box.");
                         return false;
                     }
-                }                const tmdb = document.getElementById('tmdb-key').value.trim();
+                }
+
+                const tmdb = document.getElementById('tmdb-key').value.trim();
                 if (!tmdb) { alert("TMDb API Key is required."); return false; }
                 
                 if (currentMode !== 'streams') {
-                    // Meta validation
                     if (!document.getElementById('tvdb-key').value.trim()) { alert("TVDB API Key is required for Metadata."); return false; }
                     if (!document.getElementById('fanart-key').value.trim()) { alert("Fanart API Key is required for Metadata."); return false; }
                 }
 
-                // Gemini Validation (Only if checked)
                 if (document.getElementById('enable-gemini').checked) {
                     if (!document.getElementById('gemini-key').value.trim()) {
                         alert("Please enter a Gemini API Key or uncheck the box.");
@@ -1117,15 +1082,12 @@ if (currentStepId === 'step-keys') {
                 try {
                     const mBase = JSON.parse(JSON.stringify(MASTER_METADATA));
                     
-                    // Assign keys explicitly (User Requested Fix)
+                    // Assign keys
                     mBase.config.apiKeys.tmdb = t3;
                     mBase.config.apiKeys.tvdb = tv;
                     mBase.config.apiKeys.fanart = fa;
                     
-                    // CRITICAL: Ensure we say "Keys are included" so the addon uses them
                     if(mBase.metadata) mBase.metadata.apiKeysExcluded = false;
-
-                    // Assign Interface Language
                     mBase.config.language = interfaceLang;
 
                     // Gemini Logic
@@ -1137,7 +1099,6 @@ if (currentStepId === 'step-keys') {
                             if(mBase.config.search.engineRatingPosters) mBase.config.search.engineRatingPosters["gemini.search"] = true;
                         }
                     } else {
-                        // Explicitly disable if unchecked
                         mBase.config.apiKeys.gemini = "";
                         if (mBase.config.search) {
                             mBase.config.search.ai_enabled = false;
@@ -1154,7 +1115,6 @@ if (currentStepId === 'step-keys') {
                         
                         if (prov === 'rpdb') {
                             mBase.config.apiKeys.rpdb = pKey;
-                            // Ensure topPoster doesn't inherit it
                             mBase.config.apiKeys.topPoster = ""; 
                         } else {
                             mBase.config.apiKeys.topPoster = pKey;
@@ -1162,18 +1122,15 @@ if (currentStepId === 'step-keys') {
                         }
                     }
 
-                    // Reconstruct Catalogs from State
+                    // Reconstruct Catalogs
                     let finalCatalogs = [];
                     const includeAnime = document.getElementById('include-anime').checked;
                     
                     catalogState.forEach(group => {
-                        // Skip if anime toggle is off and this is anime
                         if (group.type === 'anime' && !includeAnime) return;
-
-                        // Add items back
                         group.items.forEach(item => {
                             item.showInHome = group.showInHome;
-                            item.enabled = group.enabled; // Search/Discovery
+                            item.enabled = group.enabled; 
                             finalCatalogs.push(item);
                         });
                     });
@@ -1183,7 +1140,6 @@ if (currentStepId === 'step-keys') {
                     
                     // Show Instructions
                     document.getElementById('instr-meta').classList.remove('hidden');
-                    document.getElementById('step-add-meta').classList.remove('hidden');
                     metaGenerated = true;
                 } catch(e) { console.error("Meta Build Error", e); }
             }
@@ -1194,16 +1150,15 @@ if (currentStepId === 'step-keys') {
                     const hasDebrid = document.querySelectorAll('.debrid-check:checked').length > 0;
                     const base = hasDebrid ? JSON.parse(JSON.stringify(MASTER_WITH_DEBRID)) : JSON.parse(JSON.stringify(MASTER_WITHOUT_DEBRID));
                     
-                    // Addon Branding
                     base.addonName = "TVFlix";
                     base.addonLogo = "https://tvflix.co.uk/wp-content/uploads/2025/04/Untitled-design_20250422_200739_0000.webp";
 
                     base.tmdbApiKey = t3;
                     base.tmdbAccessToken = t4;
-                    base.tvdbApiKey = tv; // Optional usually, but we pass it
-base.resultLimits = { resolution: parseInt(resLimit) };
+                    base.tvdbApiKey = tv; 
+                    base.resultLimits = { resolution: parseInt(resLimit) };
 
-                    // --- DEBRIDIO INTEGRATION ---
+                    // Debridio (Only added for Streams)
                     if (document.getElementById('enable-debridio') && document.getElementById('enable-debridio').checked) {
                         const debKey = document.getElementById('debridio-key').value.trim();
                         if (base.presets) {
@@ -1221,95 +1176,66 @@ base.resultLimits = { resolution: parseInt(resLimit) };
                             });
                         }
                     }                    
-                    // AutoPlay Method (New Step)
-                    if(base.autoPlay) {
-                        base.autoPlay.method = autoPlayMethod;
-                    }
+                    
+                    if(base.autoPlay) base.autoPlay.method = autoPlayMethod;
 
-                    // 1. Size Limits Logic
+                    // Size Limits
                     if (document.getElementById('do-limit').checked) {
                         const speedVal = document.getElementById('speed-val').value;
-                        let maxBytes = 100000000000; // Default huge
+                        let maxBytes = 100000000000;
                         const GB = 1073741824;
-
                         if (speedVal === 'low') maxBytes = 10 * GB;
                         else if (speedVal === 'mid') maxBytes = 25 * GB;
                         else if (speedVal === 'high') maxBytes = 50 * GB;
                         
-                        // Apply to movies and series
                         if (base.size && base.size.global) {
                             base.size.global.movies[1] = maxBytes;
                             base.size.global.series[1] = maxBytes;
                         }
                     }
 
-                    // 2. Sort Preference Logic
+                    // Sort Preference
                     const sortPref = document.getElementById('sort-pref').value;
-                    const sizeSortDir = sortPref === 'speed' ? 'asc' : 'desc'; // Speed=Smallest(asc), Quality=Largest(desc)
-                    
+                    const sizeSortDir = sortPref === 'speed' ? 'asc' : 'desc';
                     if (base.sortCriteria && base.sortCriteria.global) {
                         const sizeObj = base.sortCriteria.global.find(x => x.key === 'size');
-                        if (sizeObj) {
-                            sizeObj.direction = sizeSortDir;
-                        }
+                        if (sizeObj) sizeObj.direction = sizeSortDir;
                     }
 
-// Audio Languages (Multi Select)
+                    // Audio Languages
                     const selectedLangs = Array.from(document.querySelectorAll('.lang-check:checked')).map(c => c.value);
-                    
                     if (selectedLangs.length > 0) {
-                        // FIX: If ONLY English is selected, prefer it, don't require it.
                         if (selectedLangs.length === 1 && selectedLangs[0] === 'English') {
-                            base.requiredLanguages = []; // Don't restrict results
-                            
-                            // Ensure English is in preferred list
+                            base.requiredLanguages = []; 
                             if (!base.preferredLanguages) base.preferredLanguages = [];
-                            if (!base.preferredLanguages.includes('English')) {
-                                base.preferredLanguages.unshift('English');
-                            }
+                            if (!base.preferredLanguages.includes('English')) base.preferredLanguages.unshift('English');
                         } else {
-                            // Foreign language logic: Restrict results to selected languages
                             base.requiredLanguages = selectedLangs;
-                            
-                            // Sort Logic: Prioritize language sorting for foreign content
                             base.sortCriteria.global.unshift({ "key": "language", "direction": "desc" });
-                            
-                            // Remove English from preferredLanguages if a foreign language is strictly required
-                            if (base.preferredLanguages) {
-                                base.preferredLanguages = base.preferredLanguages.filter(l => l !== 'English');
-                            }
+                            if (base.preferredLanguages) base.preferredLanguages = base.preferredLanguages.filter(l => l !== 'English');
                         }
                     }
 
-// Group Logic Update
+                    // Group Logic
                     if (document.getElementById('enable-debridio') && document.getElementById('enable-debridio').checked && base.groups && Array.isArray(base.groups.groupings)) {
-                         // Unshift adds to the START of the array (Group 1), moving everything else down
-                         base.groups.groupings.unshift({
-                             "addons": ["1d0"],
-                             "condition": "true"
-                         });
-                    }                    if (hasDebrid) {
-                        // Debrid Logic: Check cached count vs limit
+                         base.groups.groupings.unshift({ "addons": ["1d0"], "condition": "true" });
+                    }
+                    if (hasDebrid) {
                         const limitVal = parseInt(resLimit);
                         const groupCondition = `(count(resolution(cached(totalStreams), '2160p')) < ${limitVal} and count(resolution(cached(totalStreams), '1080p')) < ${limitVal} and count(resolution(cached(totalStreams), '720p')) < ${limitVal}) or totalTimeTaken > 10000`;
-                        
-                        // Apply to ALL groups starting from index 1 (skipping the first group)
                         if (base.groups && Array.isArray(base.groups.groupings)) {
                             base.groups.groupings.forEach((group, index) => {
-                                if (index > 0) { // Skip Group 1 (index 0)
-                                    group.condition = groupCondition;
-                                }
+                                if (index > 0) group.condition = groupCondition;
                             });
                         }
                     } else {
-                        // Non-Debrid Logic: Disable groupings (Default parallel fetch)
                         if (base.groups) {
                             base.groups.enabled = false;
                             base.groups.groupings = [];
                         }
                     }
 
-                    // CAMs Logic: Clear Excluded Qualities if checked
+                    // CAMs
                     if (document.getElementById('include-cams').checked) {
                         base.excludedQualities = [];
                     }
@@ -1329,19 +1255,100 @@ base.resultLimits = { resolution: parseInt(resLimit) };
                     
                     // Show Instructions
                     document.getElementById('instr-streams').classList.remove('hidden');
-                    document.getElementById('step-add-stream').classList.remove('hidden');
                 } catch(e) { console.error("Streams Build Error", e); }
             }
             
             // Show Container
             document.getElementById('instructions-area').classList.remove('hidden');
             
-            // Toggle CineBye visibility
+            // --- DYNAMIC INSTRUCTIONS TEXT ---
+            const stepsContainer = document.getElementById('instr-final');
+            let stepsHTML = '';
+
+            // HEADER (Common)
+            stepsHTML += `
+                <h3 class="text-xl font-bold text-white mb-4">3. Final Polish with CineBye</h3>
+                <div class="mb-4">
+                    <div class="mb-2 text-sm text-slate-300"><strong>Open CineBye Manager</strong></div>
+                    <p class="text-xs text-slate-400 mb-2">This tool allows you to clean up your Stremio interface.</p>
+                    <a href="https://cinebye.elfhosted.com/" target="_blank" class="inline-block bg-slate-700 px-4 py-2 rounded-lg text-white text-xs font-bold hover:bg-slate-600 border border-slate-500 transition-all">Open CineBye</a>
+                </div>
+                <ol class="list-decimal pl-5 space-y-4 text-slate-300 text-sm">
+                    <li>Log in.</li>
+            `;
+
             if (currentMode === 'streams') {
-                document.getElementById('cinebye-section').classList.add('hidden');
+                // AIO STREAMS ONLY
+                stepsHTML += `
+                    <li><strong>Cleanup & Reorder:</strong> You can also reorder your addons here. To delete old addons, simply click the <strong>Red X</strong> next to them.</li>
+                    <li>
+                        <strong>Recommended Order:</strong>
+                        <div class="pl-4 pt-2 font-mono text-xs text-indigo-300 leading-relaxed">
+                            1. Cinemeta<br>
+                            2. AIO Streams
+                        </div>
+                    </li>
+                    <li>Click <strong>Sync to Stremio</strong>.</li>
+                `;
+            } else if (currentMode === 'meta') {
+                // AIOMETA ONLY
+                stepsHTML += `
+                    <li>Tick <strong>Remove Cinemeta Catalogs</strong> and <strong>Remove Cinemeta Search</strong>.</li>
+                    <li><strong>Cleanup & Reorder:</strong> You can also reorder your addons here. To delete old addons, simply click the <strong>Red X</strong> next to them.</li>
+                    <li>
+                        <strong>Recommended Order:</strong>
+                        <div class="pl-4 pt-2 font-mono text-xs text-indigo-300 leading-relaxed">
+                            1. Cinemeta (Required Base)<br>
+                            2. AIO Metadata<br>
+                            3. Your streaming addons
+                        </div>
+                    </li>
+                    <li>Click <strong>Sync to Stremio</strong>.</li>
+                `;
             } else {
-                document.getElementById('cinebye-section').classList.remove('hidden');
+                // FULL SETUP (Default)
+                stepsHTML += `
+                    <li>Tick <strong>Remove Cinemeta Catalogs</strong> and <strong>Remove Cinemeta Search</strong>.</li>
+                    <li><strong>Cleanup & Reorder:</strong> You can also reorder your addons here. To delete old addons, simply click the <strong>Red X</strong> next to them.</li>
+                    <li>
+                        <strong>Recommended Order:</strong>
+                        <div class="pl-4 pt-2 font-mono text-xs text-indigo-300 leading-relaxed">
+                            1. Cinemeta (Required Base)<br>
+                            2. AIO Metadata<br>
+                            3. AIO Streams
+                        </div>
+                    </li>
+                    <li>Click <strong>Sync to Stremio</strong>.</li>
+                `;
             }
+
+            stepsHTML += `</ol>`;
+
+            // Footer (Common - Install Help)
+            stepsHTML += `
+                <div class="mt-8 pt-6 border-t border-slate-700">
+                    <details class="group">
+                        <summary class="flex items-center cursor-pointer text-xs font-bold text-amber-500 uppercase tracking-widest hover:text-amber-400">
+                            <span class="mr-2">⚠️ Can't install to Stremio on this device?</span>
+                            <span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div class="mt-4 bg-slate-900 p-4 rounded-lg border border-slate-700 text-xs text-slate-400 leading-relaxed">
+                            <p class="mb-2">If the "Install" buttons above don't open Stremio app:</p>
+                            <ol class="list-decimal pl-4 space-y-2">
+                                <li>Complete the Save step on the config websites to generate your <strong>Install URL</strong>.</li>
+                                <li>Copy that long URL (it starts with <code>https://...</code>).</li>
+                                <li>Open <a href="https://stremio-addon-manager.pages.dev/" target="_blank" class="text-indigo-400 underline">Addon Manager</a>.</li>
+                                <li>Click <strong>Add Addon</strong> and paste the URL manually.</li>
+                                <li>Click <strong>Sync to Stremio</strong>.</li>
+                                <li>Go back and do the CineBye step afterwards.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            `;
+            
+            // Inject the correct text
+            stepsContainer.innerHTML = stepsHTML;
         }
 
         function spawnDownloadBtn(label, obj, filename) {
