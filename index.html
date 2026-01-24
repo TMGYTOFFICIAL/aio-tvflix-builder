@@ -1222,7 +1222,7 @@ const MASTER_WITHOUT_DEBRID = {
                     }
                     if (hasDebrid) {
                         const limitVal = parseInt(resLimit);
-                        const groupCondition = `(count(resolution(cached(totalStreams), '2160p')) < ${limitVal} and count(resolution(cached(totalStreams), '1080p')) < ${limitVal} and count(resolution(cached(totalStreams), '720p')) < ${limitVal}) or totalTimeTaken > 10000`;
+                        const groupCondition = `(count(resolution(cached(totalStreams), '2160p')) < ${limitVal} or count(resolution(cached(totalStreams), '1080p')) < ${limitVal} or count(resolution(cached(totalStreams), '720p')) < ${limitVal}) and totalTimeTaken < 20000`;
                         if (base.groups && Array.isArray(base.groups.groupings)) {
                             base.groups.groupings.forEach((group, index) => {
                                 if (index > 0) group.condition = groupCondition;
