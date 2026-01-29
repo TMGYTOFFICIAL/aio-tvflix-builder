@@ -346,9 +346,9 @@
     "p2p": "single_result"
   },
   "trusted": false,
-  "addonName": "Duck Streams (Turbo)",
-  "addonLogo": "https://gitlab.com/DuckKota/guides/-/raw/main/pages/static/images/duck.png?ref_type=heads",
-  "addonDescription": "Optimized for Speed and Reliability. Hybrid RD+TorBox.",
+  "addonName": "TVFlix",
+  "addonLogo": "https://tvflix.co.uk/wp-content/uploads/2025/04/Untitled-design_20250422_200739_0000.webp",
+  "addonDescription": "Your simple AIO set up",
   "excludedResolutions": [
     "144p",
     "240p",
